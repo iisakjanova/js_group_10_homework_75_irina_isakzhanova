@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Grid, IconButton, makeStyles, TextField} from "@material-ui/core";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import {useSelector, useDispatch} from "react-redux";
+
+import {encodeMessage, setMessageData} from "../../store/actions/actions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,20 +17,16 @@ const useStyles = makeStyles(theme => ({
 
 const Form = () => {
     const classes = useStyles();
-
-    const [message, setMessage] = useState({
-        decoded: '',
-        password: '',
-        encoded: ''
-    });
+    const dispatch = useDispatch();
+    const message = useSelector(state => state.message);
 
     const handleInputChange = e => {
         const {name, value} = e.target;
+        dispatch(setMessageData(name, value));
+    };
 
-        setMessage(prev => ({
-            ...prev,
-            [name]: value,
-        }));
+    const handleEncode = () => {
+        dispatch(encodeMessage());
     };
 
     return (
@@ -54,7 +53,7 @@ const Form = () => {
                         onChange={handleInputChange}
                         className={classes.password}
                     />
-                    <IconButton>
+                    <IconButton onClick={handleEncode}>
                         <ArrowDownwardIcon />
                     </IconButton>
                     <IconButton>
