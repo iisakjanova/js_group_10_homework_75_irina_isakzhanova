@@ -26,11 +26,15 @@ const Form = () => {
     };
 
     const handleEncode = () => {
-        dispatch(encodeMessage());
+        if (message.password) {
+            dispatch(encodeMessage());
+        }
     };
 
     const handleDecode = () => {
-        dispatch(decodeMessage());
+        if (message.password) {
+            dispatch(decodeMessage());
+        }
     };
 
     return (
