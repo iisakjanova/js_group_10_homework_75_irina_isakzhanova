@@ -4,7 +4,7 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import {useSelector, useDispatch} from "react-redux";
 
-import {encodeMessage, setMessageData} from "../../store/actions/actions";
+import {decodeMessage, encodeMessage, setMessageData} from "../../store/actions/actions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -27,6 +27,10 @@ const Form = () => {
 
     const handleEncode = () => {
         dispatch(encodeMessage());
+    };
+
+    const handleDecode = () => {
+        dispatch(decodeMessage());
     };
 
     return (
@@ -56,7 +60,7 @@ const Form = () => {
                     <IconButton onClick={handleEncode}>
                         <ArrowDownwardIcon />
                     </IconButton>
-                    <IconButton>
+                    <IconButton onClick={handleDecode}>
                         <ArrowUpwardIcon />
                     </IconButton>
                 </Grid>

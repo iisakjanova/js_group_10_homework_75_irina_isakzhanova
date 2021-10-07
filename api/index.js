@@ -10,7 +10,13 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/encode', (req, res) => {
-    res.send(Vigenere.Cipher(req.body.password).crypt(req.body.text));
+    const encoded = Vigenere.Cipher(req.body.password).crypt(req.body.text);
+    res.send({encoded});
+});
+
+app.post('/decode', (req, res) => {
+    const decoded = Vigenere.Decipher(req.body.password).crypt(req.body.text);
+    res.send({decoded});
 });
 
 app.listen(port, () => {
